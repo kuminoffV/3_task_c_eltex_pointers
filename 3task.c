@@ -50,11 +50,10 @@ void array()
     }
 }
 
-void substring()
-{
+void substring() {
     char str[MAX_LENGTH];
     char str2[MAX_LENGTH];
-    char *pstr;
+    char *pstr = NULL;
 
     printf("\nEnter your string (up to %d characters):\n", MAX_LENGTH - 1);
     scanf("%s", str);
@@ -62,12 +61,25 @@ void substring()
     printf("\nEnter comparison string (up to %d characters):\n", MAX_LENGTH - 1);
     scanf("%s", str2);
 
-    pstr = strstr(str, str2);
+    int len1 = strlen(str);
+    int len2 = strlen(str2);
 
-    if (pstr == NULL)
+    for (int i = 0; i <= len1 - len2; i++) {
+        int j = 0;
+        while (j < len2 && str[i + j] == str2[j]) {
+            j++;
+        }
+        if (j == len2) {
+            pstr = &str[i];
+            break;
+        }
+    }
+
+    if (pstr == NULL) {
         printf("Substring not found!\n");
-    else
+    } else {
         printf("\nSubstring found at address: %p \nLength: %zu\n\n", (void *)pstr, strlen(str2));
+    }
 }
 
 int main()
